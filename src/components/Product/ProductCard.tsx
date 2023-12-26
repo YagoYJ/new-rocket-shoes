@@ -28,7 +28,7 @@ export function ProductCard({id, image, price, title}: Product) {
                 <ProductAmountInput productId={id} />
                 
                 <Link 
-                    href={`products/${id}`}
+                    href="/cart"
                     className="w-full flex items-center justify-center gap-1 text-purple-700 hover:text-zinc-50 hover:bg-purple-700 transition-all font-bold text-xs p-2 rounded"
                 >
                     Go to cart <ArrowRight size={15} />
