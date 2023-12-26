@@ -1,11 +1,15 @@
+"use client"
 import { ProductAmountInput } from "@/components/Product/ProductAmountInput";
+import { useCart } from "@/store/useCart";
 import { formatCurrency } from "@/utils/formatCurrency";
-import { mockedCart } from "@/utils/mockedCart";
-import { Trash } from "lucide-react";
+import { Frown, Trash } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Cart() {
-    const totalAmount = mockedCart.reduce(
+    const {cart, removeProduct} = useCart()
+
+    const totalAmount = cart.reduce(
         (accumulator, currentValue) => accumulator + (currentValue.amount * currentValue.product.price),
         0,
     );
@@ -25,13 +29,21 @@ export default function Cart() {
             </header>
 
             <main className="w-full flex flex-col">
-                {mockedCart.map(cartItem => {
+                {cart.length === 0 ? (
+                    <div className="flex items-center justify-center gap-2 py-5 text-zinc-700">
+                        <p>Your cart is empty</p>
+                        <Frown />
+                    </div>
+                ) : cart.map(cartItem => {
                     const {product, amount} = cartItem;
                     const displayAmount = formatCurrency(product.price)
                     const displaySubtotal = formatCurrency(product.price * amount)
 
                     return (
-                        <div key={product.id} className="w-full flex items-center justify-between py-5 border-b border-b-zinc-400/50">
+                        <div 
+                            key={product.id}
+                            className="w-full flex items-center justify-between py-5 border-b border-b-zinc-400/50"
+                        >
                             <div className="w-[100px] flex items-center justify-center">
                                 <Image
                                     className="w-24 h-24"
@@ -55,7 +67,10 @@ export default function Cart() {
 
                             <span className="w-[150px] text-zinc-900 font-semibold text-base text-center">{displaySubtotal}</span>
 
-                            <button className="w-10 flex items-center justify-center">
+                            <button
+                                onClick={() => removeProduct(product.id)}
+                                className="w-10 flex items-center justify-center"
+                            >
                                 <Trash
                                     className="text-purple-600 rounded-full hover:bg-purple-500/40 items-center justify-center p-2"
                                     size={32}
@@ -73,9 +88,18 @@ export default function Cart() {
                         </span>
                     </h3>
 
-                    <button className="px-4 py-2 bg-purple-600 text-zinc-100 rounded hover:opacity-90">
-                        Finish order
-                    </button>
+                    {cart.length === 0 ? (
+                        <Link
+                            href="/"
+                            className="px-4 py-2 bg-purple-600 text-zinc-100 rounded hover:opacity-90"
+                        >
+                            See products
+                        </Link>
+                    ) : (
+                        <button className="px-4 py-2 bg-purple-600 text-zinc-100 rounded hover:opacity-90">
+                            Finish order
+                        </button>
+                    )}
                 </div>
             </main>
         </div>
