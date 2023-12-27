@@ -1,6 +1,10 @@
-import { Cart, mockedCart } from "@/utils/mockedCart"
-import { Product, products } from "@/utils/mockedProducts";
+import { Product, products } from "@/utils/products";
 import {create} from "zustand"
+
+type Cart = {
+    product: Product,
+    amount: number
+}
 
 interface SetProductAmountProps {
     id: Product["id"];
@@ -17,7 +21,7 @@ interface CartState {
 }
 
 export const useCart = create<CartState>((set) => ({
-    cart: mockedCart,
+    cart: [],
     addNewProduct(productId) {
         set((state) => {
             const product = products.find(item => item.id === productId);

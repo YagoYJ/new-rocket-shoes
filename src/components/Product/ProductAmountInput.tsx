@@ -1,7 +1,7 @@
 "use client"
 
 import { MinusCircle, PlusCircle } from "lucide-react";
-import { Product } from "@/utils/mockedProducts"
+import { Product } from "@/utils/products"
 import { useCart } from "@/store/useCart";
 
 interface Props {
