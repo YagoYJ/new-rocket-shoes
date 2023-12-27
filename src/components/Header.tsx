@@ -10,7 +10,9 @@ export function Header () {
                 <Image src={logoImage} alt="Rocket Shoes" />
             </Link>
 
-            <Cart />
+            <Link href='/cart'>
+                <Cart />
+            </Link>
         </header>
     )
 }
