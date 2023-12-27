@@ -1,4 +1,4 @@
-import { products } from "@/utils/mockedProducts";
+import { products } from "@/utils/products";
 import { ProductCard } from "./ProductCard";
 
 export function ProductsList () {

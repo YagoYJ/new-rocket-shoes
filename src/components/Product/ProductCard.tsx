@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Product } from "@/utils/mockedProducts";
+import { Product } from "@/utils/products";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { ProductAmountInput } from "./ProductAmountInput";
 
