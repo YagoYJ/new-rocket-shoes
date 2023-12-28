@@ -5,6 +5,7 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { Frown, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function Cart() {
     const {cart, removeProduct} = useCart()
@@ -96,7 +97,10 @@ export default function Cart() {
                             See products
                         </Link>
                     ) : (
-                        <button className="px-4 py-2 bg-purple-600 text-zinc-100 rounded hover:opacity-90">
+                        <button
+                            onClick={() => toast.success('Order created')}
+                            className="px-4 py-2 bg-purple-600 text-zinc-100 rounded hover:opacity-90"
+                        >
                             Finish order
                         </button>
                     )}
